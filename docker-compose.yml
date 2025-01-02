@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  weather-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8502:8501"  # Le port 8502 de la machine locale est mappé au port 8501 du conteneur
+    volumes:
+      - .:/app  # Monte le répertoire local dans le conteneur
+    environment:
+      - STREAMLIT_SERVER_PORT=8501  # Définit le port utilisé par Streamlit dans le conteneur
+    depends_on:
+      - mongodb  # Assure que MongoDB est démarré avant le service Streamlit
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"  # Mappe le port local 27017 vers le conteneur MongoDB
+    volumes:
+      - mongodb_data:/data/db  # Persiste les données MongoDB dans un volume
+
+volumes:
+  mongodb_data:

@@ -1,0 +1,8 @@
+flask==2.2.3
+pymongo==4.3.3
+streamlit==1.15.2
+plotly==5.11.0
+requests==2.28.1
+pandas==1.5.3
+numpy==1.21.6
+altair==4.2.2 
